@@ -6,12 +6,14 @@ class ProgressBarWidget extends StatelessWidget {
   final String doneProject;
   final String inProgressProject;
   final String pendingProject;
-  const ProgressBarWidget(
-      {super.key,
-      required this.totalProject,
-      required this.doneProject,
-      required this.inProgressProject,
-      required this.pendingProject});
+
+  const ProgressBarWidget({
+    super.key,
+    required this.totalProject,
+    required this.doneProject,
+    required this.inProgressProject,
+    required this.pendingProject,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class ProgressBarWidget extends StatelessWidget {
               ),
             ),
             Text(
-              "$totalProject\n Total Project",
+              "$totalProject\n Total ",
               textAlign: TextAlign.center,
               style: CustomFontStyle().bold(20, Colors.white),
             ),

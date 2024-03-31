@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +27,7 @@ class MyInputField extends StatelessWidget {
         children: [
           Text(
             title,
-            style: CustomFontStyle().normal(16, Colors.black),
+            style: CustomFontStyle().normal(16, bwhite),
           ),
           Container(
             height: 52,
@@ -48,7 +49,7 @@ class MyInputField extends StatelessWidget {
                     style: customText().normal(14, Colors.black),
                     decoration: InputDecoration(
                         hintText: hint,
-                        hintStyle: customText().normal(14, Colors.black)
+                        hintStyle: customText().normal(14, bwhite)
                         /*focusedBorder: UnderlineInputBorder(borderSide: BorderSide(
             color: context.theme.backgroundColor,
             width: 0

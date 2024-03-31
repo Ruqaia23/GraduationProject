@@ -53,9 +53,12 @@ class _AddTaskState extends State<AddTask> {
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Column(
             children: [
-              Text(
-                "Add Task",
-                style: customText().bold(24, Colors.black),
+              Padding(
+                padding: const EdgeInsets.only(right: 235.0),
+                child: Text(
+                  "Add Task",
+                  style: customText().bold(24, Colors.black),
+                ),
               ),
               MyInputField(
                 title: "title",

@@ -27,6 +27,8 @@ class _AddProjectState extends State<AddProjects> {
     15,
     20,
   ];
+
+  List<String> tasks = [];
   DateTime _selectedDate = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -147,22 +149,54 @@ class _AddProjectState extends State<AddProjects> {
               ),*/
 
               MyInputField(
-                  title: "Project Tasks",
-                  hint: "Add The Task you want to Project",
-                  controller: null,
-                  widget: IconButton(
-                    icon: Icon(
-                      Icons.delete_outline_outlined,
-                      color: kgreen,
-                    ),
-                    onPressed: () {},
-                  )),
-              TextField(
-                  decoration: InputDecoration(
-                hintText: "Add Tasks",
-                hintStyle: TextStyle(color: bwhite),
-                prefixIcon: Icon(Icons.add),
-              )),
+                title: "Project Tasks",
+                hint: "Add The Task you want to Project",
+                controller: null,
+                widget: IconButton(
+                  icon: Icon(
+                    Icons.add,
+                    color: kgreen,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      tasks.add("");
+                    });
+                  },
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: tasks.length,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          onChanged: (value) {
+                            tasks[index] = value;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "Add Task",
+                            hintStyle: TextStyle(color: bwhite),
+                          ),
+                          style: CustomFontStyle().normal(14, bwhite),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.delete_outline_outlined,
+                          color: kgreen,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            tasks.removeAt(index);
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),
               Row(
                 children: [
                   Padding(

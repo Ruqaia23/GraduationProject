@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
@@ -5,8 +6,18 @@ import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/screens/add_project.dart';
 import 'package:taskfull/screens/add_task.dart';
 import 'package:taskfull/widgets/button.dart';
+import 'package:taskfull/widgets/home_pages/all_page.dart';
+import 'package:taskfull/widgets/home_pages/finished_page.dart';
+import 'package:taskfull/widgets/home_pages/today_page.dart';
+import 'package:taskfull/widgets/name_avatar_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +66,7 @@ class HomeScreen extends StatelessWidget {
             icon: Icon(Icons.create_outlined,
                 size: 50, color: Color.fromRGBO(203, 208, 95, 100)),
             label: "create",
-            
+
           ),*/
           BottomNavigationBarItem(
             icon: Icon(Icons.article_outlined,
@@ -71,178 +82,118 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //fisrt in the page
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              alignment: Alignment.centerLeft,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hello",
-                        style: CustomFontStyle().normal(23, bwhite),
-                      ),
-                      Text(
-                        "Ruqaia Alghuwaizi",
-                        style: CustomFontStyle().bold(24, bwhite),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 10),
-                        child: Text(
-                          "My Task",
-                          style: CustomFontStyle().bold(24, Colors.black),
-                        ),
-                      ),
-                    ],
+                  NameAvatarWidget(
+                    name: "Ruqia Alqhuawaizi",
+                    avatarUrl: "",
                   ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 35),
-                    alignment: Alignment.center,
-                    child: Column(children: [
-                      MyButton(
-                        lebel: "+",
-                        onTap: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => AddTask())),
-                      ),
-                    ]),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "My Tasks",
+                      style: CustomFontStyle().bold(23, Colors.black),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => AddTask())),
+                    icon: Icon(
+                      Icons.add,
+                      color: kgreen,
+                      size: 40,
+                    ),
                   )
                 ],
               ),
             ),
             // all - today -finshed Bar
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10.0),
               alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "All",
-                    style: CustomFontStyle().normal(20, Colors.black),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        currentIndex = 0;
+                      });
+                    },
+                    child: Text(
+                      "All",
+                      style: CustomFontStyle().normal(
+                        20,
+                        currentIndex == 0
+                            ? Color.fromRGBO(203, 208, 95, 1)
+                            : Colors.black,
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    width: 67,
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        currentIndex = 1;
+                      });
+                    },
+                    child: Text(
+                      "Today",
+                      style: CustomFontStyle().normal(
+                        20,
+                        currentIndex == 1
+                            ? Color.fromRGBO(203, 208, 95, 1)
+                            : Colors.black,
+                      ),
+                    ),
                   ),
-                  Text(
-                    "Today",
-                    style: CustomFontStyle().normal(20, Colors.black),
-                  ),
-                  SizedBox(
-                    width: 67,
-                  ),
-                  Text(
-                    "Finshed",
-                    style: CustomFontStyle().normal(20, Colors.black),
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        currentIndex = 2;
+                      });
+                    },
+                    child: Text(
+                      "Finished",
+                      style: CustomFontStyle().normal(
+                        20,
+                        currentIndex == 2
+                            ? Color.fromRGBO(203, 208, 95, 1)
+                            : Colors.black,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
 
-            // task container
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: SizedBox(
-                height: 200,
-                child: Expanded(
-                  child: ListView.builder(
-                    itemCount: 8,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics: ScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Container(
-                            width: 148,
-                            height: 20,
-                            decoration: BoxDecoration(
-                                color: Color.fromRGBO(203, 208, 95, 100),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Center(
-                              child: Text(
-                                "task Name",
-                                style: customText().bold(24, kblue),
-                              ),
-                            )),
-                      );
-                    },
-                  ),
-                ),
+            if (currentIndex == 0) AllPage(),
+            if (currentIndex == 1)
+              TodayPage(
+                projectName: "Project Name",
+                description: "Description, ",
+                isDone: true,
               ),
-            ),
-
-            //my projact
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "My Project",
-                    style: CustomFontStyle().bold(24, Colors.black),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 55),
-                    child: Column(children: [
-                      MyButton(
-                        lebel: "+",
-                        onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddProjects())),
-                      ),
-                    ]),
-                  ),
-                )
-              ],
-            ),
-            //project contaier
-            Expanded(
-              child: ListView.builder(
-                itemCount: 7,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                physics: ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 20),
-                      child: Container(
-                        width: double.infinity,
-                        height: 70,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: Color.fromRGBO(244, 235, 224, 100),
-                            borderRadius: BorderRadius.circular(50)),
-                        child: ListTile(
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Project name",
-                                style: CustomFontStyle().bold(20, kblue),
-                              ),
-                              Text(
-                                "start",
-                                style: CustomFontStyle().bold(13, kblue),
-                              )
-                            ],
-                          ),
-                          leading: Icon(
-                            Icons.note,
-                          ),
-                        ),
-                      ));
-                },
+            if (currentIndex == 2)
+              FinishedPage(
+                projectName: "Project Name",
+                description: "Description, ",
+                isDone: true,
               ),
-            ),
           ],
         ),
       ),

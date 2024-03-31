@@ -3,7 +3,7 @@ import 'package:taskfull/app/task_app.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/models/note.dart';
-import 'package:taskfull/screens/add_note.dart';
+import 'package:taskfull/screens/my_note.dart';
 import 'package:taskfull/screens/add_project.dart';
 import 'package:taskfull/screens/add_task.dart';
 import 'package:taskfull/screens/home_screen.dart';
@@ -26,7 +26,7 @@ class TaskApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: kBackgroundColor, brightness: Brightness.light),
       darkTheme: ThemeData(),
-      home: HomeScreen(),
+      home: AddProjects(),
     );
   }
 }

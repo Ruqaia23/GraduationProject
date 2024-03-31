@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/widgets/daily_steps_container.dart';
+import 'package:taskfull/widgets/name_avatar_widget.dart';
 import 'package:taskfull/widgets/progress_bar_widget.dart';
 
 class PersonalPage extends StatelessWidget {
@@ -55,32 +56,9 @@ class PersonalPage extends StatelessWidget {
               child: Column(
                 children: [
                   // Header Section
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 100,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16),
-                        child: CircleAvatar(
-                          radius: 30,
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Hello!",
-                            style: CustomFontStyle().normal(23, Colors.white),
-                          ),
-                          Text(
-                            "Ruqaia Alghuwaizi",
-                            style: CustomFontStyle().bold(24, Colors.white),
-                          ),
-                        ],
-                      ),
-                    ],
+                  NameAvatarWidget(
+                    name: "Ruqia Alqhuawaizi",
+                    avatarUrl: "",
                   ),
                   SizedBox(
                     height: 100,

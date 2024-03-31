@@ -11,11 +11,17 @@ class Note {
   });
 }
 
-List<Note> sampleNote = [
+List<Note> sampleNotes = [
   Note(
-      id: 0,
-      title: "My Sweet diray",
-      content: "content",
-      modifiefTime: DateTime.now()),
-  Note(id: 1, title: 'try', content: "content", modifiefTime: DateTime.now()),
+    id: 0,
+    title: "My Sweet diray",
+    content: "content ",
+    modifiefTime: DateTime.now(),
+  ),
+  Note(
+    id: 1,
+    title: 'try',
+    content: "content content content content content content content",
+    modifiefTime: DateTime.now(),
+  ),
 ];

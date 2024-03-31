@@ -1,93 +1,87 @@
 import 'package:flutter/material.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
-import 'package:taskfull/models/note.dart';
+import 'package:taskfull/config/theme.dart';
+import 'package:taskfull/screens/my_note.dart';
 
-class MyNotes extends StatefulWidget {
-  const MyNotes({Key? key}) : super(key: key);
+class EditScreen extends StatefulWidget {
+  const EditScreen({super.key});
 
   @override
-  State<MyNotes> createState() => _MyNotesState();
+  State<EditScreen> createState() => _EditScreenState();
 }
 
-class _MyNotesState extends State<MyNotes> {
+class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
+        padding: const EdgeInsets.fromLTRB(20, 40, 16, 0),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Notes",
-                  style: customText().bold(24, bwhite),
+                Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: bwhite,
+                      ),
+                    ),
+                  ],
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.sort,
-                    color: bwhite,
+                Padding(
+                  padding: const EdgeInsets.only(right: 230),
+                  child: Text(
+                    "Notes",
+                    style: customText().bold(24, bwhite),
                   ),
                 ),
               ],
             ),
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Search notes...",
-                hintStyle: TextStyle(color: bwhite),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: kgreen,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: ListView(
+                  children: const [
+                    TextField(
+                      style: TextStyle(color: bwhite, fontSize: 30),
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Title',
+                          hintStyle: TextStyle(
+                              color: bwhite,
+                              fontSize: 30,
+                              fontWeight: FontWeight.normal)),
+                    ),
+                    TextField(
+                      style: TextStyle(color: bwhite, fontSize: 17),
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Type somthing here',
+                          hintStyle: TextStyle(
+                              color: bwhite,
+                              fontSize: 17,
+                              fontWeight: FontWeight.normal)),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: sampleNote.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    color: word,
-                    child: ListTile(
-                      title: RichText(
-                        text: TextSpan(
-                            text: "${sampleNote[index].title} :\n",
-                            style: CustomFontStyle().bold(20, bwhite),
-                            children: [
-                              TextSpan(
-                                text: "${sampleNote[index].content} :\n",
-                                style: CustomFontStyle().normal(20, bwhite),
-                              )
-                            ]),
-                      ),
-                      trailing: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.delete,
-                          color: kgreen,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            )
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        elevation: 10,
         backgroundColor: Color(0x61233531),
         child: const Icon(
-          Icons.add,
+          Icons.save,
           size: 38,
+          color: kgreen,
         ),
       ),
     );

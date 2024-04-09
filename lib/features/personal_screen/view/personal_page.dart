@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
+import 'package:taskfull/features/personal_screen/domain/personal_controller.dart';
 import 'package:taskfull/widgets/daily_steps_container.dart';
 import 'package:taskfull/widgets/name_avatar_widget.dart';
 import 'package:taskfull/widgets/progress_bar_widget.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PersonalPage extends StatelessWidget {
-  const PersonalPage({super.key});
+class PersonalScreen extends ConsumerStatefulWidget {
+  const PersonalScreen({super.key});
 
   @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _PersonalScreenState();
+}
+
+class _PersonalScreenState extends ConsumerState<PersonalScreen> {
+  @override
   Widget build(BuildContext context) {
+    final state = ref.read(personalProvider);
     return Scaffold(
       backgroundColor: Colors.transparent,
 
@@ -59,7 +67,7 @@ class PersonalPage extends StatelessWidget {
                 children: [
                   // Header Section
                   NameAvatarWidget(
-                    name: "Ruqia Alqhuawaizi",
+                    name: state.user.firstName.toString(),
                     avatarUrl: "",
                   ),
                   SizedBox(
@@ -67,17 +75,17 @@ class PersonalPage extends StatelessWidget {
                   ),
                   // Body Section
                   ProgressBarWidget(
-                    totalProject: "00",
-                    doneProject: "00",
-                    inProgressProject: "00",
-                    pendingProject: "00",
+                    totalProject: state.total.toString(),
+                    doneProject: state.done.toString(),
+                    inProgressProject: state.inProgress.toString(),
+                    pendingProject: state.pending.toString(),
                   ),
 
                   SizedBox(
                     height: 100,
                   ),
                   // Footer Section
-                  DailyStepsWidget(steps: "3000"),
+                  DailyStepsWidget(steps: state.steps.toString()),
                 ],
               ),
             ),

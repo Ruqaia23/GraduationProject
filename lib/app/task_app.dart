@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:taskfull/screens/home_screen.dart';
+import 'package:taskfull/features/home_screen/view/home_screen.dart';
 
 class TaskApp extends StatelessWidget {
   @override

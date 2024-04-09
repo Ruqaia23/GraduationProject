@@ -60,38 +60,8 @@ class _MyNotesState extends State<MyNotes> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: bwhite,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    "Notes",
-                    style: customText().bold(24, bwhite),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        filteredNotes = sortNotedByModifiedTime(filteredNotes);
-                      });
-                    },
-                    icon: Icon(
-                      Icons.sort,
-                      color: bwhite,
-                    ),
-                  ),
-                ],
-              ),
-              TextField(
+              /*TextField(
+                
                 style: CustomFontStyle().normal(16, bwhite),
                 onChanged: onSearchTextChanged,
                 decoration: InputDecoration(
@@ -102,7 +72,7 @@ class _MyNotesState extends State<MyNotes> {
                     color: kgreen,
                   ),
                 ),
-              ),
+              ),*/
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

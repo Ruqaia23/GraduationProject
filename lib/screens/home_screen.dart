@@ -15,6 +15,9 @@ import 'package:taskfull/widgets/name_avatar_widget.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class HomeScreen extends StatefulWidget {
+  // final String title;
+
+  //HomeScreen({required this.title});
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -40,32 +43,41 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(35, 53, 49, 100),
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          centerTitle: true,
-          leading: IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () {},
-              color: Color.fromRGBO(203, 208, 95, 100),
-              iconSize: 24,
-              alignment: Alignment.centerLeft),
-          actions: [
-            Icon(
+        backgroundColor: Colors.transparent,
+        // title: Text("widget."),
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(context: context, delegate: CustomSearch());
+            },
+            icon: const Icon(
               Icons.search_outlined,
               color: Color.fromRGBO(203, 208, 95, 100),
-              size: 24,
+              size: 32,
             ),
-            SizedBox(
-              width: 20,
-            ),
-          ]),
+          ),
+        ],
+      ),
+
+      /* elevation: 0,
+        centerTitle: true,
+        
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(
+            Icons.search_outlined,
+            color: Color.fromRGBO(203, 208, 95, 100),
+            size: 32,
+          ),
+        ),*/
+
       bottomNavigationBar: BottomNavyBar(
           onItemSelected: (index) {
             _pageController.jumpToPage(index);
           },
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
-              inactiveColor: Colors.transparent,
+              inactiveColor: Colors.black,
               icon: Icon(Icons.home_outlined,
                   size: 32, color: Color.fromRGBO(203, 208, 95, 100)),
               title: Text("Home"),
@@ -211,5 +223,66 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+}
+
+class CustomSearch extends SearchDelegate {
+  List<String> allData = ["workout", "My Grad project", "vist AOU"];
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          query = '';
+        },
+        icon: const Icon(Icons.clear),
+      )
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List<String> matchQuery = [];
+    for (var item in allData) {
+      if (item.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item);
+      }
+    }
+    return ListView.builder(
+        itemCount: matchQuery.length,
+        itemBuilder: (context, index) {
+          var result = matchQuery[index];
+          return ListTile(
+            title: Text(result),
+          );
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List<String> matchQuery = [];
+    for (var item in allData) {
+      if (item.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(item);
+      }
+    }
+    return ListView.builder(
+        itemCount: matchQuery.length,
+        itemBuilder: (context, index) {
+          var result = matchQuery[index];
+          return ListTile(
+            title: Text(result),
+          );
+        });
   }
 }

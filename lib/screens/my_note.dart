@@ -54,56 +54,58 @@ class _MyNotesState extends State<MyNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBackgroundColor,
+      backgroundColor: Colors.transparent,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16, 40, 16, 0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: bwhite,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: bwhite,
+                        ),
                       ),
+                    ],
+                  ),
+                  Text(
+                    "Notes",
+                    style: customText().bold(24, bwhite),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        filteredNotes = sortNotedByModifiedTime(filteredNotes);
+                      });
+                    },
+                    icon: Icon(
+                      Icons.sort,
+                      color: bwhite,
                     ),
-                  ],
-                ),
-                Text(
-                  "Notes",
-                  style: customText().bold(24, bwhite),
-                ),
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      filteredNotes = sortNotedByModifiedTime(filteredNotes);
-                    });
-                  },
-                  icon: Icon(
-                    Icons.sort,
-                    color: bwhite,
+                  ),
+                ],
+              ),
+              TextField(
+                style: CustomFontStyle().normal(16, bwhite),
+                onChanged: onSearchTextChanged,
+                decoration: InputDecoration(
+                  hintText: "Search notes...",
+                  hintStyle: TextStyle(color: bwhite),
+                  prefixIcon: Icon(
+                    Icons.search,
+                    color: kgreen,
                   ),
                 ),
-              ],
-            ),
-            TextField(
-              style: CustomFontStyle().normal(16, bwhite),
-              onChanged: onSearchTextChanged,
-              decoration: InputDecoration(
-                hintText: "Search notes...",
-                hintStyle: TextStyle(color: bwhite),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: kgreen,
-                ),
               ),
-            ),
-            Expanded(
-              child: ListView.builder(
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: filteredNotes.length,
                 itemBuilder: (context, index) {
                   return Card(
@@ -153,8 +155,8 @@ class _MyNotesState extends State<MyNotes> {
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

@@ -12,7 +12,9 @@ class PersonalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      backgroundColor: Colors.transparent,
+
+      /* appBar: AppBar(
         backgroundColor: const Color.fromRGBO(35, 53, 49, 100),
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -36,11 +38,11 @@ class PersonalPage extends StatelessWidget {
                 )),
           ),
         ],
-      ),
-      backgroundColor: const Color.fromRGBO(35, 53, 49, 100),
-      body: SafeArea(
+      ),*/
+
+      body: SingleChildScrollView(
         child: Container(
-          decoration: const BoxDecoration(
+          /*decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [
                 Color.fromRGBO(35, 53, 49, 0),
@@ -49,7 +51,7 @@ class PersonalPage extends StatelessWidget {
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
             ),
-          ),
+          ),*/
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Center(

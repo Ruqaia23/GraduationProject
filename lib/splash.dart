@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:taskfull/screens/home_screen.dart';
+import 'package:taskfull/features/home_screen/view/home_screen.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

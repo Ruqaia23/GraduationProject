@@ -6,7 +6,7 @@ import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/screens/add_project.dart';
 import 'package:taskfull/screens/add_task.dart';
 import 'package:taskfull/screens/my_note.dart';
-import 'package:taskfull/screens/personal_page.dart';
+import 'package:taskfull/features/personal_screen/view/personal_page.dart';
 import 'package:taskfull/widgets/button.dart';
 import 'package:taskfull/widgets/home_pages/all_page.dart';
 import 'package:taskfull/widgets/home_pages/finished_page.dart';
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
-              inactiveColor: Colors.black,
+              activeColor: Colors.black,
               icon: Icon(Icons.home_outlined,
                   size: 32, color: Color.fromRGBO(203, 208, 95, 100)),
               title: Text("Home"),
@@ -218,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             MyNotes(),
-            PersonalPage(),
+            PersonalScreen()
           ],
         ),
       ),

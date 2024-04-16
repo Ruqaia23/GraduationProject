@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
-import 'package:taskfull/screens/add_project.dart';
-import 'package:taskfull/screens/add_task.dart';
+import 'package:taskfull/features/addProject_addTask_screen/view/add_project.dart';
+import 'package:taskfull/features/addTask_screen/view/add_task.dart';
+import 'package:taskfull/models/task.dart';
 import 'package:taskfull/screens/my_note.dart';
 import 'package:taskfull/features/personal_screen/view/personal_page.dart';
 import 'package:taskfull/widgets/button.dart';
@@ -13,16 +14,16 @@ import 'package:taskfull/widgets/home_pages/finished_page.dart';
 import 'package:taskfull/widgets/home_pages/today_page.dart';
 import 'package:taskfull/widgets/name_avatar_widget.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatefulWidget {
-  // final String title;
+class homeScreen extends ConsumerStatefulWidget {
+  const homeScreen({super.key});
 
-  //HomeScreen({required this.title});
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _homeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _homeScreenState extends ConsumerState<homeScreen> {
   int currentIndex = 0;
   late PageController _pageController;
 
@@ -58,26 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-
-      /* elevation: 0,
-        centerTitle: true,
-        
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.search_outlined,
-            color: Color.fromRGBO(203, 208, 95, 100),
-            size: 32,
-          ),
-        ),*/
-
       bottomNavigationBar: BottomNavyBar(
+          backgroundColor: kBackgroundColor,
           onItemSelected: (index) {
             _pageController.jumpToPage(index);
           },
           items: <BottomNavyBarItem>[
             BottomNavyBarItem(
-              activeColor: Colors.black,
+              activeColor: kgreen,
               icon: Icon(Icons.home_outlined,
                   size: 32, color: Color.fromRGBO(203, 208, 95, 100)),
               title: Text("Home"),
@@ -113,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       NameAvatarWidget(
-                        name: "Ruqia Alqhuawaizi",
+                        name: "Ruqaia Alqhuawaizi",
                         avatarUrl: "",
                       ),
                     ],
@@ -132,8 +121,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       IconButton(
-                        onPressed: () => Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => AddTask())),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => TaskScreen())),
                         icon: Icon(
                           Icons.add,
                           color: kgreen,
@@ -218,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             MyNotes(),
-            PersonalScreen()
+            homeScreen()
           ],
         ),
       ),

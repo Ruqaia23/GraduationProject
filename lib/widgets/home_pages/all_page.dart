@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
-import 'package:taskfull/screens/add_project.dart';
+import 'package:taskfull/features/addProject_addTask_screen/view/add_project.dart';
 import 'package:taskfull/widgets/button.dart';
 
 class AllPage extends StatelessWidget {
@@ -90,7 +90,7 @@ class AllPage extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AddProjects())),
+                      MaterialPageRoute(builder: (context) => ProjectScreen())),
                   icon: Icon(
                     Icons.add,
                     color: kgreen,

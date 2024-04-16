@@ -2,22 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:intl/intl.dart';
 import 'package:taskfull/config/theme.dart';
+import 'package:taskfull/features/addTask_screen/domain/addTask_controller.dart';
+import 'package:taskfull/models/task.dart';
 import 'package:taskfull/widgets/Home/botton_Add_Task_project.dart';
 import 'package:taskfull/widgets/button.dart';
 import 'package:get/get.dart';
 import 'package:taskfull/widgets/input_field.dart';
+import 'package:date_format/date_format.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddTask extends StatefulWidget {
-  const AddTask({Key? key}) : super(key: key);
+class TaskScreen extends ConsumerStatefulWidget {
+  const TaskScreen({super.key});
 
   @override
-  State<AddTask> createState() => _AddTaskState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _taskScreenState();
 }
 
-class _AddTaskState extends State<AddTask> {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _noteController = TextEditingController();
-  DateTime _selectedDate = DateTime.now();
+class _taskScreenState extends ConsumerState<TaskScreen> {
+  TimeOfDay _selectedDate = TimeOfDay.now();
   String _endTime = "9:30 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   int _selectedRemind = 5;
@@ -30,6 +32,9 @@ class _AddTaskState extends State<AddTask> {
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.read(taskProvider);
+    final controller = ref.watch(taskProvider.notifier);
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -63,13 +68,13 @@ class _AddTaskState extends State<AddTask> {
               MyInputField(
                 title: "title",
                 hint: "Enter your Title",
-                controller: _titleController,
+                controller: state.title,
                 widget: null,
               ),
               MyInputField(
                 title: "note",
                 hint: "Enter your note",
-                controller: _noteController,
+                controller: state.note,
                 widget: null,
               ),
               MyInputField(
@@ -82,7 +87,7 @@ class _AddTaskState extends State<AddTask> {
                     color: kgreen,
                   ),
                   onPressed: () {
-                    _getDateFormUser();
+                    controller.getDateFormUser(context);
                   },
                 ),
               ),
@@ -95,7 +100,7 @@ class _AddTaskState extends State<AddTask> {
                       hint: _startTime,
                       widget: IconButton(
                         onPressed: () {
-                          _selectStartTime();
+                          controller.selectStartTime(context);
                         },
                         icon: Icon(Icons.access_time_filled_rounded,
                             color: kgreen),
@@ -110,7 +115,7 @@ class _AddTaskState extends State<AddTask> {
                       hint: _endTime,
                       widget: IconButton(
                         onPressed: () {
-                          _selectEndTime();
+                          controller.selectEndTime(context);
                         },
                         icon: Icon(Icons.access_time_filled_rounded,
                             color: kgreen),
@@ -153,7 +158,8 @@ class _AddTaskState extends State<AddTask> {
                   Padding(
                     padding: const EdgeInsets.all(40.0),
                     child: CreateButton(
-                        lebel: "Create  ", onTap: () => _validateDate()),
+                        lebel: "Create  ",
+                        onTap: () => controller.validateDate()),
                   ),
                 ],
               )
@@ -164,67 +170,18 @@ class _AddTaskState extends State<AddTask> {
     );
   }
 
-  _validateDate() {
-    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
-      Get.back();
-    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
-      Get.snackbar("Required", "All fields are required!",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.white,
-          icon: Icon(
-            Icons.warning_amber_rounded,
-            color: Colors.red,
-          ));
-    }
-  }
-
-  _getDateFormUser() async {
-    DateTime? _pickerDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2015),
-      lastDate: DateTime(2121),
+  /*_AddTaskToDb() async {
+    int value = await _taskController.addTask(
+      task: Task(
+        note: _noteController.text,
+        title: _titleController.text,
+        date: DateFormat.yMd().format(_selectedDate),
+        startDate: _startTime,
+        endDate: _endTime,
+        remind: _selectedRemind,
+        isCompleted: 0,
+      ),
     );
-
-    if (_pickerDate != null) {
-      setState(() {
-        _selectedDate = _pickerDate;
-        print(_selectedDate);
-      });
-    } else {
-      print("it's null or something wrong!");
-    }
-  }
-
-  _selectStartTime() async {
-    TimeOfDay? selectedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-
-    if (selectedTime != null) {
-      setState(() {
-        _startTime = selectedTime.format(context);
-        print(_startTime);
-      });
-    } else {
-      print("it's null or something wrong!");
-    }
-  }
-
-  _selectEndTime() async {
-    TimeOfDay? selectedTime = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-
-    if (selectedTime != null) {
-      setState(() {
-        _endTime = selectedTime.format(context);
-        print(_endTime);
-      });
-    } else {
-      print("it's null or something wrong!");
-    }
-  }
+    print("My id is " + "$value");
+  }*/
 }

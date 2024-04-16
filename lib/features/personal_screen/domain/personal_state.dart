@@ -1,14 +1,14 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taskfull/models/user.dart';
 
-class PersonalState {
+class homelState {
   final UserName user;
   final int done;
   final int inProgress;
   final int pending;
   final int total;
   final int steps;
-  PersonalState({
+  homelState({
     required this.user,
     required this.done,
     required this.inProgress,
@@ -17,8 +17,8 @@ class PersonalState {
     required this.steps,
   });
 
-  factory PersonalState.initial() {
-    return PersonalState(
+  factory homelState.initial() {
+    return homelState(
       done: 1,
       inProgress: 4,
       pending: 3,
@@ -33,7 +33,7 @@ class PersonalState {
     );
   }
 
-  PersonalState copyWith({
+  homelState copyWith({
     UserName? user,
     int? done,
     int? inProgress,
@@ -41,7 +41,7 @@ class PersonalState {
     int? total,
     int? steps,
   }) {
-    return PersonalState(
+    return homelState(
       user: user ?? this.user,
       done: done ?? this.done,
       inProgress: inProgress ?? this.inProgress,

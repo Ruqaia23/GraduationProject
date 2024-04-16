@@ -50,16 +50,6 @@ class _PersonalScreenState extends ConsumerState<PersonalScreen> {
 
       body: SingleChildScrollView(
         child: Container(
-          /*decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color.fromRGBO(35, 53, 49, 0),
-                Color.fromRGBO(35, 53, 49, 100),
-              ],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
-          ),*/
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Center(

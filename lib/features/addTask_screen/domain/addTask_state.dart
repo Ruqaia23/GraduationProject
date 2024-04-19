@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taskfull/models/task.dart';
 import 'package:taskfull/models/user.dart';
@@ -8,8 +9,8 @@ class ProjectState {
   final TextEditingController title;
   final TextEditingController note;
   final DateTime date;
-  final DateTime startDate;
-  final DateTime endDate;
+  final TimeOfDay startDate;
+  final TimeOfDay endDate;
   final int remind;
   final List<Tasks> taskList;
   ProjectState(
@@ -28,8 +29,8 @@ class ProjectState {
         title: TextEditingController(),
         note: TextEditingController(),
         date: DateTime.now(),
-        startDate: DateTime.now(),
-        endDate: DateTime.now(),
+        startDate: TimeOfDay.now(),
+        endDate: TimeOfDay.now(),
         remind: 5,
         taskList: []);
   }
@@ -39,8 +40,8 @@ class ProjectState {
     TextEditingController? title,
     TextEditingController? note,
     DateTime? date,
-    DateTime? startDate,
-    DateTime? endDate,
+    TimeOfDay? startDate,
+    TimeOfDay? endDate,
     int? remind,
     List<Tasks>? taskList,
   }) {

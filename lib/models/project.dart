@@ -4,10 +4,11 @@ class Projects {
   String? note;
   int? date;
   List? tasks;
+  final String modifiefTime;
 
   String? isCompleted;
 
-  Projects(
+  Projects(this.modifiefTime,
       {this.id,
       this.title,
       this.note,
@@ -26,7 +27,7 @@ class Projects {
     };
   }
 
-  Projects.fromMap(Map<dynamic, dynamic> map) {
+  Projects.fromMap(Map<dynamic, dynamic> map, this.modifiefTime) {
     id = map['id'];
     title = map['title'];
     note = map['note'];

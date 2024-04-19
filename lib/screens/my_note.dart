@@ -2,27 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:taskfull/features/note/controller.dart';
 
 import 'package:taskfull/models/note.dart';
+import 'package:taskfull/models/note_model.dart';
 import 'package:taskfull/screens/add_note.dart';
 
-class MyNotes extends StatefulWidget {
-  const MyNotes({Key? key}) : super(key: key);
+class MyNote extends ConsumerStatefulWidget {
+  const MyNote({super.key});
 
   @override
-  State<MyNotes> createState() => _MyNotesState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyNoteState();
 }
 
-class _MyNotesState extends State<MyNotes> {
-  List<Note> filteredNotes = [];
+class _MyNoteState extends ConsumerState<MyNote> {
+  List<NoteModel> filteredNotes = [];
   bool sorted = false;
   @override
   void initState() {
     super.initState();
-    filteredNotes = sampleNotes;
+   // filteredNotes = sampleNotes;
   }
 
-  List<Note> sortNotedByModifiedTime(List<Note> notes) {
+  /*List<Note> sortNotedByModifiedTime(List<Note> notes) {
     if (sorted) {
       notes.sort((a, b) => a.modifiefTime.compareTo(b.modifiefTime));
     } else {
@@ -31,28 +34,29 @@ class _MyNotesState extends State<MyNotes> {
 
     sorted = !sorted;
     return notes;
-  }
+  }*/
 
-  void onSearchTextChanged(String searchText) {
+  /*void onSearchTextChanged(String searchText) {
     setState(() {
-      filteredNotes = sampleNotes
+     // filteredNotes = sampleNotes
           .where((note) =>
               note.content.toLowerCase().contains(searchText.toLowerCase()) ||
               note.title.toLowerCase().contains(searchText.toLowerCase()))
           .toList();
     });
-  }
+  }*?
 
   void deleteNote(int index) {
     setState(() {
-      Note note = filteredNotes[index];
-      sampleNotes.remove(note);
+      // Note note = filteredNotes[index];
+      // sampleNotes.remove(note);
       filteredNotes.removeAt(index);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(notesProvider);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
@@ -76,7 +80,7 @@ class _MyNotesState extends State<MyNotes> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: filteredNotes.length,
+                itemCount: state.notes.length,
                 itemBuilder: (context, index) {
                   return Card(
                     margin: EdgeInsets.only(bottom: 20),
@@ -91,23 +95,23 @@ class _MyNotesState extends State<MyNotes> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           text: TextSpan(
-                            text: "${filteredNotes[index].title} :\n",
+                            text: "${state.notes[index].title} :\n",
                             style: CustomFontStyle().bold(20, bwhite),
                             children: [
                               TextSpan(
-                                text: "${filteredNotes[index].content} :\n",
+                                text: "${state.notes[index].content} :\n",
                                 style: CustomFontStyle().normal(20, bwhite),
                               ),
                             ],
                           ),
                         ),
-                        subtitle: Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Text(
-                            'Edeted:${DateFormat.yMd().format(filteredNotes[index].modifiefTime)} \n',
-                            style: CustomFontStyle().normal(12, bwhite),
-                          ),
-                        ),
+                        // subtitle: Padding(
+                        //   padding: const EdgeInsets.only(top: 8.0),
+                        //   child: Text(
+                        //     'Edeted:${DateFormat.yMd().format(filteredNotes[index].modifiefTime)} \n',
+                        //     style: CustomFontStyle().normal(12, bwhite),
+                        //   ),
+                        // ),
                         trailing: IconButton(
                           onPressed: () async {
                             final result = await confirmDialog(context);

@@ -125,9 +125,12 @@ class AllPage extends StatelessWidget {
                               .bold(20, Color.fromRGBO(63, 70, 151, 1)),
                         ),
                         subtitle: Text(
-                          "start",
-                          style: CustomFontStyle()
-                              .normal(15, Color.fromRGBO(63, 70, 151, 1)),
+                          'start',
+
+                          //  ' ${DateFormat.yMd().format(DateTime.now())} \n',
+
+                          //  style: CustomFontStyle()
+                          //  .normal(15, Color.fromRGBO(63, 70, 151, 1)),
                         ),
                         leading: Icon(
                           Icons.note_alt,

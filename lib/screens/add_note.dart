@@ -37,13 +37,21 @@ class _EditScreenState extends State<EditScreen> {
             size: 24,
           ),
         ),
+        title: Column(
+          children: [
+            Text(
+              "Notes",
+              style: customText().bold(24, bwhite),
+            ),
+          ],
+        ),
         actions: [],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 40, 16, 0),
         child: Column(
           children: [
-            Row(
+            /*Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -51,7 +59,7 @@ class _EditScreenState extends State<EditScreen> {
                   style: customText().bold(24, bwhite),
                 ),
               ],
-            ),
+            ),*/
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),

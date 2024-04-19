@@ -16,14 +16,14 @@ import 'package:taskfull/widgets/name_avatar_widget.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class homeScreen extends ConsumerStatefulWidget {
-  const homeScreen({super.key});
+class HomeScreen extends ConsumerStatefulWidget {
+  const HomeScreen({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _homeScreenState();
 }
 
-class _homeScreenState extends ConsumerState<homeScreen> {
+class _homeScreenState extends ConsumerState<HomeScreen> {
   int currentIndex = 0;
   late PageController _pageController;
 
@@ -208,8 +208,8 @@ class _homeScreenState extends ConsumerState<homeScreen> {
                   ),
               ],
             ),
-            MyNotes(),
-            homeScreen()
+            MyNote(),
+            HomeScreen()
           ],
         ),
       ),

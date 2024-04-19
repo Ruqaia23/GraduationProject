@@ -19,7 +19,7 @@ class ProjectScreen extends ConsumerStatefulWidget {
 class _projectScreenState extends ConsumerState<ProjectScreen> {
   //String _endTime = "9:30 PM";
   //String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
-  int _selectedRemind = 5;
+  //int _selectedRemind = 5;
   List<int> remindList = [
     5,
     10,
@@ -31,8 +31,8 @@ class _projectScreenState extends ConsumerState<ProjectScreen> {
   List<String> projectTaskList = [];
   @override
   Widget build(BuildContext context) {
-    final state = ref.read(projectProvider);
-    final controller = ref.watch(projectProvider.notifier);
+    final state = ref.watch(projectProvider);
+    final controller = ref.read(projectProvider.notifier);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -73,7 +73,7 @@ class _projectScreenState extends ConsumerState<ProjectScreen> {
               ),
               MyInputField(
                 title: "Date",
-                hint: DateFormat.yMd().format(state.date),
+                hint: DateFormat.yMd().format(state.date as DateTime),
                 controller: null,
                 widget: IconButton(
                   icon: Icon(

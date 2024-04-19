@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:taskfull/widgets/input_field.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 
 class TaskScreen extends ConsumerStatefulWidget {
   const TaskScreen({super.key});
@@ -19,9 +20,6 @@ class TaskScreen extends ConsumerStatefulWidget {
 }
 
 class _taskScreenState extends ConsumerState<TaskScreen> {
-  TimeOfDay _selectedDate = TimeOfDay.now();
-  String _endTime = "9:30 PM";
-  String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   int _selectedRemind = 5;
   List<int> remindList = [
     5,
@@ -32,8 +30,12 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.read(taskProvider);
-    final controller = ref.watch(taskProvider.notifier);
+    final state = ref.watch(taskProvider);
+    final controller = ref.read(taskProvider.notifier);
+    final String _startTime =
+        MaterialLocalizations.of(context).formatTimeOfDay(state.startDate);
+    final String _endTime =
+        MaterialLocalizations.of(context).formatTimeOfDay(state.endDate);
 
     return Scaffold(
       backgroundColor: kBackgroundColor,
@@ -79,7 +81,7 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
               ),
               MyInputField(
                 title: "Date",
-                hint: DateFormat.yMd().format(_selectedDate),
+                hint: DateFormat.yMd().format(state.date),
                 controller: null,
                 widget: IconButton(
                   icon: Icon(
@@ -153,6 +155,7 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
                   },
                 ),
               ),
+              //google map >> new page
               Row(
                 children: [
                   Padding(

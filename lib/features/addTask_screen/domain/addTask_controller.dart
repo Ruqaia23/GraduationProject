@@ -32,7 +32,7 @@ class TaskNotifier extends StateNotifier<ProjectState> {
   getDateFormUser(BuildContext context) async {
     DateTime? _pickerDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: state.date,
       firstDate: DateTime(2015),
       lastDate: DateTime(2121),
     );
@@ -51,7 +51,7 @@ class TaskNotifier extends StateNotifier<ProjectState> {
     );
 
     if (selectedTime != null) {
-      state = state.copyWith(date: selectedTime);
+      state = state.copyWith(startDate: selectedTime);
     } else {
       print("it's null or something wrong!");
     }
@@ -64,7 +64,7 @@ class TaskNotifier extends StateNotifier<ProjectState> {
     );
 
     if (selectedTime != null) {
-      state = state.copyWith(date: selectedTime);
+      state = state.copyWith(endDate: selectedTime);
     } else {
       print("it's null or something wrong!");
     }

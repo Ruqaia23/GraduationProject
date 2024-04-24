@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
+import 'package:taskfull/features/note/controller.dart';
 import 'package:taskfull/screens/my_note.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class EditScreen extends StatefulWidget {
-  const EditScreen({Key? key}) : super(key: key);
+class EditScreen extends ConsumerStatefulWidget {
+  const EditScreen({super.key});
 
   @override
-  State<EditScreen> createState() => _EditScreenState();
+  ConsumerState createState() => _EditScreenState();
 }
 
-class _EditScreenState extends State<EditScreen> {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _contentController = TextEditingController();
-
-  @override
-  void dispose() {
-    _titleController.dispose();
-    _contentController.dispose();
-    super.dispose();
-  }
-
+class _EditScreenState extends ConsumerState<EditScreen> {
   @override
   Widget build(BuildContext context) {
+    final state = ref.watch(notesProvider);
+    final controller = ref.read(notesProvider.notifier);
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -66,7 +60,7 @@ class _EditScreenState extends State<EditScreen> {
                 child: ListView(
                   children: [
                     TextField(
-                      controller: _titleController,
+                      controller: state.title,
                       style: TextStyle(color: bwhite, fontSize: 30),
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -79,7 +73,7 @@ class _EditScreenState extends State<EditScreen> {
                       ),
                     ),
                     TextField(
-                      controller: _contentController,
+                      controller: state.content,
                       style: TextStyle(color: bwhite, fontSize: 17),
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -99,9 +93,7 @@ class _EditScreenState extends State<EditScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Add functionality to save the note
-        },
+        onPressed: () => controller.addNote(context),
         backgroundColor: Color(0x61233531),
         child: const Icon(
           Icons.save,

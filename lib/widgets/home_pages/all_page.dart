@@ -3,16 +3,24 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/features/addProject_addTask_screen/view/add_project.dart';
+import 'package:taskfull/features/addTask_screen/domain/addTask_controller.dart';
 import 'package:taskfull/widgets/button.dart';
 
-class AllPage extends StatelessWidget {
+class AllPage extends ConsumerStatefulWidget {
   const AllPage({super.key});
 
   @override
+  ConsumerState createState() => _AllPageState();
+}
+
+class _AllPageState extends ConsumerState<AllPage> {
+  @override
   Widget build(BuildContext context) {
+    final state = ref.watch(taskProvider);
     return Expanded(
       child: Column(
         children: [
@@ -21,7 +29,7 @@ class AllPage extends StatelessWidget {
             child: SizedBox(
               height: 200,
               child: ListView.builder(
-                itemCount: 8,
+                itemCount: state.taskList.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 physics: ScrollPhysics(),
@@ -63,7 +71,7 @@ class AllPage extends StatelessWidget {
                               height: 45,
                             ),
                             Text(
-                              "task Name",
+                              state.taskList[index].title ?? '',
                               style: customText()
                                   .bold(24, Color.fromRGBO(63, 70, 151, 1)),
                             ),

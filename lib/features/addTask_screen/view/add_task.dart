@@ -162,7 +162,7 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
                     padding: const EdgeInsets.all(40.0),
                     child: CreateButton(
                         lebel: "Create  ",
-                        onTap: () => controller.validateDate()),
+                        onTap: () => controller.newTask(context)),
                   ),
                 ],
               )
@@ -173,7 +173,7 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
     );
   }
 
-  /*_AddTaskToDb() async {
+/*_AddTaskToDb() async {
     int value = await _taskController.addTask(
       task: Task(
         note: _noteController.text,

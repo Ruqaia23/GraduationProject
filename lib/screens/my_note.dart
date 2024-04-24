@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskfull/features/note/controller.dart';
 
-import 'package:taskfull/models/note.dart';
 import 'package:taskfull/models/note_model.dart';
 import 'package:taskfull/screens/add_note.dart';
 
@@ -19,10 +18,11 @@ class MyNote extends ConsumerStatefulWidget {
 class _MyNoteState extends ConsumerState<MyNote> {
   List<NoteModel> filteredNotes = [];
   bool sorted = false;
+
   @override
   void initState() {
     super.initState();
-   // filteredNotes = sampleNotes;
+    // filteredNotes = sampleNotes;
   }
 
   /*List<Note> sortNotedByModifiedTime(List<Note> notes) {
@@ -52,11 +52,12 @@ class _MyNoteState extends ConsumerState<MyNote> {
       // sampleNotes.remove(note);
       filteredNotes.removeAt(index);
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(notesProvider);
+    final controller = ref.read(notesProvider.notifier);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
@@ -65,7 +66,7 @@ class _MyNoteState extends ConsumerState<MyNote> {
           child: Column(
             children: [
               /*TextField(
-                
+
                 style: CustomFontStyle().normal(16, bwhite),
                 onChanged: onSearchTextChanged,
                 decoration: InputDecoration(
@@ -114,10 +115,10 @@ class _MyNoteState extends ConsumerState<MyNote> {
                         // ),
                         trailing: IconButton(
                           onPressed: () async {
-                            final result = await confirmDialog(context);
-                            if (result != null && result) {
-                              deleteNote(index);
-                            }
+                            final result = await confirmDialog(context, () {
+                              controller.deleteNote(index, context);
+                            });
+                            if (result != null && result) {}
                           },
                           icon: Icon(
                             Icons.delete,
@@ -153,7 +154,7 @@ class _MyNoteState extends ConsumerState<MyNote> {
     );
   }
 
-  Future<dynamic> confirmDialog(BuildContext context) {
+  Future<dynamic> confirmDialog(BuildContext context, Function() onPressed) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -171,9 +172,7 @@ class _MyNoteState extends ConsumerState<MyNote> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context, false);
-                  },
+                  onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: kgreen,
                   ),

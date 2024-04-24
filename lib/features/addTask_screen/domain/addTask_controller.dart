@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
+import 'package:taskfull/data/hive_functions.dart';
 import 'package:taskfull/features/addTask_screen/domain/addTask_state.dart';
 import 'package:taskfull/features/personal_screen/domain/personal_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskfull/models/task.dart';
+import 'package:taskfull/models/task_model.dart';
 
 final taskProvider = StateNotifierProvider<TaskNotifier, ProjectState>((ref) {
   return TaskNotifier();
 });
 
 class TaskNotifier extends StateNotifier<ProjectState> {
-  TaskNotifier() : super(ProjectState.initial());
+  TaskNotifier() : super(ProjectState.initial()) {
+    getTasks();
+  }
 
   validateDate() {
     if (state.title.text.isNotEmpty && state.note.text.isNotEmpty) {
@@ -68,5 +72,33 @@ class TaskNotifier extends StateNotifier<ProjectState> {
     } else {
       print("it's null or something wrong!");
     }
+  }
+
+  void getTasks() async {
+    final res = await HiveFunc().getTasks();
+    state = state.copyWith(taskList: res);
+  }
+
+  void newTask(BuildContext context) async {
+    await HiveFunc().setNewTask(
+      TaskModel(
+        title: state.title.text,
+        date: state.date,
+        endDate: state.endDate,
+        startDate: state.startDate,
+        note: state.note.text,
+        remind: state.remind,
+      ),
+    );
+    state = state.copyWith(
+      remind: 5,
+      note: TextEditingController(),
+      startDate: TimeOfDay.now(),
+      endDate: TimeOfDay.now(),
+      date: DateTime.now(),
+      title: TextEditingController(),
+    );
+    getTasks();
+    Navigator.pop(context);
   }
 }

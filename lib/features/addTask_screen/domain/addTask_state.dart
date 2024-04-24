@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:taskfull/models/task.dart';
+import 'package:taskfull/models/task_model.dart';
 import 'package:taskfull/models/user.dart';
 
 class ProjectState {
@@ -12,7 +13,8 @@ class ProjectState {
   final TimeOfDay startDate;
   final TimeOfDay endDate;
   final int remind;
-  final List<Tasks> taskList;
+  final List<TaskModel> taskList;
+
   ProjectState(
       {required this.id,
       required this.title,
@@ -34,6 +36,7 @@ class ProjectState {
         remind: 5,
         taskList: []);
   }
+
   ProjectState copyWith({
     int? id,
     int? done,
@@ -43,7 +46,7 @@ class ProjectState {
     TimeOfDay? startDate,
     TimeOfDay? endDate,
     int? remind,
-    List<Tasks>? taskList,
+    List<TaskModel>? taskList,
   }) {
     return ProjectState(
       id: id ?? this.id,

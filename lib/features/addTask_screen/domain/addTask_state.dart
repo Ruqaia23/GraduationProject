@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:taskfull/models/project.dart';
 import 'package:taskfull/models/task.dart';
 import 'package:taskfull/models/task_model.dart';
 import 'package:taskfull/models/user.dart';

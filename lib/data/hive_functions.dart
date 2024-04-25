@@ -73,24 +73,24 @@ class HiveFunc {
     list.add(projects.toJson());
     await box.put('projects', list);
   }
-/*
-  Future<List<TaskModel>> getTasks() async {
-    final box = await Hive.openBox('tasks');
-    final list = await box.get('tasks', defaultValue: []);
-    List<TaskModel> tasks = [];
+
+  Future<List<ProjectsModel>> getProjects() async {
+    final box = await Hive.openBox('projects');
+    final list = await box.get('projects', defaultValue: []);
+    List<ProjectsModel> project = [];
     list.forEach((element) {
-      tasks.add(TaskModel.fromJson(element));
+      project.add(ProjectsModel.fromJson(element));
     });
-    return tasks;
+    return project;
   }
 
-  Future<void> deleteTask(TaskModel not) async {
-    final box = await Hive.openBox('tasks');
-    List list = await box.get('tasks', defaultValue: []);
+  Future<void> deleteProject(ProjectsModel not) async {
+    final box = await Hive.openBox('projects');
+    List list = await box.get('projects', defaultValue: []);
     print(list);
     list.removeWhere(
       (ele) => ele['title'] == not.title && ele['note'] == not.note,
     );
     print(list);
-  }*/
+  }
 }

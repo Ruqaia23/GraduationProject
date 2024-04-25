@@ -8,7 +8,7 @@ class ProjectState {
   final TextEditingController title;
   final TextEditingController note;
   final DateTime date;
-  // final List<Project> projectTaskList;
+  final List<ProjectsModel> projectTaskList;
   // final List<Project> projectList;
 
   ProjectState({
@@ -16,7 +16,8 @@ class ProjectState {
     required this.title,
     required this.note,
     required this.date,
-    // required this.projectList,
+    required this.projectTaskList,
+
     // required this.projectTaskList
   });
 
@@ -26,7 +27,7 @@ class ProjectState {
       title: TextEditingController(),
       note: TextEditingController(),
       date: DateTime.now(),
-      // projectTaskList: [],
+      projectTaskList: [],
       // projectList: []
     );
   }
@@ -35,7 +36,7 @@ class ProjectState {
     TextEditingController? title,
     TextEditingController? note,
     DateTime? date,
-    //List<Project>? projectList,
+    List<ProjectsModel>? projectList,
     //List<Project>? projectTaskList,
   }) {
     return ProjectState(
@@ -43,7 +44,7 @@ class ProjectState {
       date: date ?? this.date,
       title: title ?? this.title,
       note: note ?? this.note,
-      // projectList: projectList ?? this.projectList,
+      projectTaskList: projectTaskList ?? this.projectTaskList,
       //projectTaskList: projectTaskList ?? this.projectTaskList,
     );
   }

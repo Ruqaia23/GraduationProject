@@ -110,7 +110,7 @@ class _AllPageState extends ConsumerState<AllPage> {
             ),
           ),
 
-          // //my projact
+          // projacts contenar
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(

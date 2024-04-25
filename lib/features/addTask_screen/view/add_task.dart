@@ -172,19 +172,4 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
       ),
     );
   }
-
-/*_AddTaskToDb() async {
-    int value = await _taskController.addTask(
-      task: Task(
-        note: _noteController.text,
-        title: _titleController.text,
-        date: DateFormat.yMd().format(_selectedDate),
-        startDate: _startTime,
-        endDate: _endTime,
-        remind: _selectedRemind,
-        isCompleted: 0,
-      ),
-    );
-    print("My id is " + "$value");
-  }*/
 }

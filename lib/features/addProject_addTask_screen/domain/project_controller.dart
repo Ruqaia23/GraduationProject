@@ -3,18 +3,20 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:path/path.dart';
+import 'package:taskfull/data/hive_functions.dart';
 import 'package:taskfull/features/addTask_screen/domain/addTask_state.dart';
 import 'package:taskfull/features/personal_screen/domain/personal_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:taskfull/models/project.dart';
 import 'package:taskfull/models/task.dart';
 
 final projectProvider =
-    StateNotifierProvider<ProjectNotifier, ProjectState>((ref) {
+    StateNotifierProvider<ProjectNotifier, TaskState>((ref) {
   return ProjectNotifier();
 });
 
-class ProjectNotifier extends StateNotifier<ProjectState> {
-  ProjectNotifier() : super(ProjectState.initial());
+class ProjectNotifier extends StateNotifier<TaskState> {
+  ProjectNotifier() : super(TaskState.initial());
 
   validateDate() {
     if (state.title.text.isNotEmpty && state.note.text.isNotEmpty) {
@@ -44,5 +46,27 @@ class ProjectNotifier extends StateNotifier<ProjectState> {
     } else {
       print("it's null or something wrong!");
     }
+  }
+
+  void getTasks() async {
+    final res = await HiveFunc().getTasks();
+    state = state.copyWith(taskList: res);
+  }
+
+  void newProject(BuildContext context) async {
+    await HiveFunc().setNewProject(
+      ProjectsModel(
+        title: state.title.text,
+        date: state.date,
+        note: state.note.text,
+      ),
+    );
+    state = state.copyWith(
+      note: TextEditingController(),
+      date: DateTime.now(),
+      title: TextEditingController(),
+    );
+    getTasks();
+    Navigator.pop(context);
   }
 }

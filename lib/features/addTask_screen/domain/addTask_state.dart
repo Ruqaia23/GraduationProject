@@ -5,7 +5,7 @@ import 'package:taskfull/models/task.dart';
 import 'package:taskfull/models/task_model.dart';
 import 'package:taskfull/models/user.dart';
 
-class ProjectState {
+class TaskState {
   final int id;
   final TextEditingController title;
   final TextEditingController note;
@@ -15,7 +15,7 @@ class ProjectState {
   final int remind;
   final List<TaskModel> taskList;
 
-  ProjectState(
+  TaskState(
       {required this.id,
       required this.title,
       required this.note,
@@ -25,8 +25,8 @@ class ProjectState {
       required this.remind,
       required this.taskList});
 
-  factory ProjectState.initial() {
-    return ProjectState(
+  factory TaskState.initial() {
+    return TaskState(
         id: 0,
         title: TextEditingController(),
         note: TextEditingController(),
@@ -37,7 +37,7 @@ class ProjectState {
         taskList: []);
   }
 
-  ProjectState copyWith({
+  TaskState copyWith({
     int? id,
     int? done,
     TextEditingController? title,
@@ -48,7 +48,7 @@ class ProjectState {
     int? remind,
     List<TaskModel>? taskList,
   }) {
-    return ProjectState(
+    return TaskState(
       id: id ?? this.id,
       date: date ?? this.date,
       title: title ?? this.title,

@@ -60,7 +60,7 @@ class ProgressBarWidget extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "$doneProject\nDone",
+                  "$doneProject\n Done",
                   textAlign: TextAlign.left,
                   style: CustomFontStyle()
                       .bold(14, Color.fromRGBO(153, 188, 133, 1)),

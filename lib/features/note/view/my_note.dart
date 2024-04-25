@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskfull/features/note/controller.dart';
 
 import 'package:taskfull/models/note_model.dart';
-import 'package:taskfull/screens/add_note.dart';
+import 'package:taskfull/features/note/view/add_note.dart';
 
 class MyNote extends ConsumerStatefulWidget {
   const MyNote({super.key});
@@ -22,7 +22,6 @@ class _MyNoteState extends ConsumerState<MyNote> {
   @override
   void initState() {
     super.initState();
-    // filteredNotes = sampleNotes;
   }
 
   /*List<Note> sortNotedByModifiedTime(List<Note> notes) {
@@ -65,19 +64,6 @@ class _MyNoteState extends ConsumerState<MyNote> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              /*TextField(
-
-                style: CustomFontStyle().normal(16, bwhite),
-                onChanged: onSearchTextChanged,
-                decoration: InputDecoration(
-                  hintText: "Search notes...",
-                  hintStyle: TextStyle(color: bwhite),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: kgreen,
-                  ),
-                ),
-              ),*/
               ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),

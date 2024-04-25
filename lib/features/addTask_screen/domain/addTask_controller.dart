@@ -9,12 +9,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskfull/models/task.dart';
 import 'package:taskfull/models/task_model.dart';
 
-final taskProvider = StateNotifierProvider<TaskNotifier, ProjectState>((ref) {
+final taskProvider = StateNotifierProvider<TaskNotifier, TaskState>((ref) {
   return TaskNotifier();
 });
 
-class TaskNotifier extends StateNotifier<ProjectState> {
-  TaskNotifier() : super(ProjectState.initial()) {
+class TaskNotifier extends StateNotifier<TaskState> {
+  TaskNotifier() : super(TaskState.initial()) {
     getTasks();
   }
 

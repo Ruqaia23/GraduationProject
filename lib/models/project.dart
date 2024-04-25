@@ -1,44 +1,28 @@
-class Projects {
-  int? id;
+import 'package:flutter/material.dart';
+
+class ProjectsModel {
   String? title;
   String? note;
-  int? date;
-  List? tasks;
-  final String modifiefTime;
+  DateTime? date;
 
-  String? isCompleted;
+  ProjectsModel({
+    this.title,
+    this.note,
+    this.date,
+  });
 
-  Projects(this.modifiefTime,
-      {this.id,
-      this.title,
-      this.note,
-      this.date,
-      this.tasks,
-      this.isCompleted});
-
-  Map<String, dynamic> toMap() {
-    return {
-      "id": id,
-      "title": title,
-      "note": note,
-      "date": date,
-      "tasks": tasks,
-      "isCompleted": isCompleted,
-    };
+  ProjectsModel.fromJson(Map<dynamic, dynamic> json) {
+    title = json['title'];
+    note = json['note'];
+    date = json['date'];
   }
 
-  Projects.fromMap(Map<dynamic, dynamic> map, this.modifiefTime) {
-    id = map['id'];
-    title = map['title'];
-    note = map['note'];
-    date = map['date'];
+  Map<dynamic, dynamic> toJson() {
+    final Map<dynamic, dynamic> data = new Map<dynamic, dynamic>();
+    data['title'] = title;
+    data['note'] = note;
+    data['date'] = date;
 
-    tasks = map['tasks'];
-    isCompleted = map['isCompleted'];
-  }
-
-  @override
-  String toString() {
-    return toMap().toString();
+    return data;
   }
 }

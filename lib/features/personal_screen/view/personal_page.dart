@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/features/personal_screen/domain/personal_controller.dart';
-import 'package:taskfull/widgets/daily_steps_container.dart';
+import 'package:taskfull/features/personal_screen/view/daily_steps_container.dart';
 import 'package:taskfull/widgets/name_avatar_widget.dart';
 import 'package:taskfull/widgets/progress_bar_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

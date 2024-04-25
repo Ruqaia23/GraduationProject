@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:intl/intl.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/features/addProject_addTask_screen/domain/project_controller.dart';
+import 'package:taskfull/features/addProject_addTask_screen/domain/project_state.dart';
 import 'package:taskfull/widgets/Home/botton_Add_Task_project.dart';
 import 'package:taskfull/widgets/button.dart';
 import 'package:get/get.dart';
@@ -17,9 +19,6 @@ class ProjectScreen extends ConsumerStatefulWidget {
 }
 
 class _projectScreenState extends ConsumerState<ProjectScreen> {
-  //String _endTime = "9:30 PM";
-  //String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
-  //int _selectedRemind = 5;
   List<int> remindList = [
     5,
     10,
@@ -27,12 +26,13 @@ class _projectScreenState extends ConsumerState<ProjectScreen> {
     20,
   ];
 
-  List<String> ProjectList = [];
   List<String> projectTaskList = [];
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(projectProvider);
     final controller = ref.read(projectProvider.notifier);
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -40,14 +40,15 @@ class _projectScreenState extends ConsumerState<ProjectScreen> {
         elevation: 0,
         centerTitle: true,
         leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Color.fromRGBO(203, 208, 95, 100),
-              size: 24,
-            )),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Color.fromRGBO(203, 208, 95, 100),
+            size: 24,
+          ),
+        ),
         actions: [],
       ),
       body: Container(
@@ -59,23 +60,24 @@ class _projectScreenState extends ConsumerState<ProjectScreen> {
                 "Add Project",
                 style: customText().bold(24, Colors.black),
               ),
-              MyInputField(
+              MyprojectInputField(
                 title: "title",
-                hint: "Enter your Title",
-                controller: null,
-                widget: null,
+                projecthint: "Enter your Title",
+                projectcontroller: state.title,
+                projectwidget: null,
               ),
-              MyInputField(
+              MyprojectInputField(
                 title: "note",
-                hint: "Enter your note",
-                controller: null,
-                widget: null,
+                projecthint: "Enter your note",
+                projectcontroller: state.note,
+                projectwidget: null,
               ),
-              MyInputField(
+              MyprojectInputField(
                 title: "Date",
-                hint: DateFormat.yMd().format(state.date as DateTime),
-                controller: null,
-                widget: IconButton(
+                projecthint: DateFormat.yMd().format(state.date as DateTime),
+                projectcontroller:
+                    TextEditingController(text: state.date.toString()),
+                projectwidget: IconButton(
                   icon: Icon(
                     Icons.calendar_today_outlined,
                     color: kgreen,
@@ -85,11 +87,11 @@ class _projectScreenState extends ConsumerState<ProjectScreen> {
                   },
                 ),
               ),
-              MyInputField(
+              MyprojectInputField(
                 title: "Project Tasks",
-                hint: "Add The Task you want to Project",
-                controller: null,
-                widget: IconButton(
+                projecthint: "Add The Task you want to Project",
+                projectcontroller: null,
+                projectwidget: IconButton(
                   icon: Icon(
                     Icons.add,
                     color: kgreen,
@@ -139,11 +141,20 @@ class _projectScreenState extends ConsumerState<ProjectScreen> {
                   Padding(
                     padding: const EdgeInsets.all(40.0),
                     child: CreateButton(
-                      lebel: "Create  ",
-                      onTap: () {
-                        print("object");
-                      },
-                    ),
+                        lebel: "Create  ",
+                        onTap: () => controller.newProject(context)),
+
+                    /* final projectData = {
+                          'title': state.title.text,
+                          'note': state.note.text,
+                          'date': state.date.toString(),
+                          'tasks': projectTaskList,
+                        };
+
+                        final box = await Hive.openBox('projects');
+                        box.add(projectData);
+
+                        Navigator.pop(context);*/
                   ),
                 ],
               )

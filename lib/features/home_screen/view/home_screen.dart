@@ -6,7 +6,7 @@ import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/features/addProject_addTask_screen/view/add_project.dart';
 import 'package:taskfull/features/addTask_screen/view/add_task.dart';
 import 'package:taskfull/models/task.dart';
-import 'package:taskfull/screens/my_note.dart';
+import 'package:taskfull/features/note/view/my_note.dart';
 import 'package:taskfull/features/personal_screen/view/personal_page.dart';
 import 'package:taskfull/widgets/button.dart';
 import 'package:taskfull/widgets/home_pages/all_page.dart';
@@ -209,7 +209,7 @@ class _homeScreenState extends ConsumerState<HomeScreen> {
               ],
             ),
             MyNote(),
-            HomeScreen()
+            PersonalScreen()
           ],
         ),
       ),

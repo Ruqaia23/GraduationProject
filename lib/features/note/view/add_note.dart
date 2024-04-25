@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/features/note/controller.dart';
-import 'package:taskfull/screens/my_note.dart';
+import 'package:taskfull/features/note/view/my_note.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class EditScreen extends ConsumerStatefulWidget {

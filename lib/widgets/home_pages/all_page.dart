@@ -1,14 +1,19 @@
 import 'dart:ui';
 
+import 'package:controller/controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/features/addProject_addTask_screen/view/add_project.dart';
 import 'package:taskfull/features/addTask_screen/domain/addTask_controller.dart';
 import 'package:taskfull/widgets/button.dart';
+import 'package:taskfull/widgets/home_pages/finished_page.dart';
+import 'package:taskfull/widgets/home_pages/finished_page.dart';
+import 'package:taskfull/widgets/home_pages/finished_page.dart';
 
 class AllPage extends ConsumerStatefulWidget {
   const AllPage({super.key});
@@ -34,49 +39,71 @@ class _AllPageState extends ConsumerState<AllPage> {
                 scrollDirection: Axis.horizontal,
                 physics: ScrollPhysics(),
                 itemBuilder: (context, index) {
+                  var isDateTime;
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
-                        width: 148,
-                        height: 20,
-                        decoration: BoxDecoration(
-                            color: Color.fromRGBO(203, 208, 95, 100),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.centerRight,
-                              padding: EdgeInsets.all(8),
-                              child: Container(
-                                width: 75,
-                                height: 20,
-                                padding: EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  border: Border.all(
-                                      width: 1,
-                                      color: Color.fromRGBO(63, 70, 151, 1)),
+                      width: 148,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(203, 208, 95, 100),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.centerRight,
+                            padding: EdgeInsets.all(8),
+                            child: Container(
+                              width: 75,
+                              height: 20,
+                              padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                  width: 1,
+                                  color: Color.fromRGBO(63, 70, 151, 1),
                                 ),
-                                child: FittedBox(
-                                  fit: BoxFit.contain,
-                                  child: Text(
-                                    "Since When",
-                                    style: customText().bold(
-                                        16, Color.fromRGBO(63, 70, 151, 1)),
+                              ),
+                              child: FittedBox(
+                                fit: BoxFit.contain,
+                                child: Text(
+                                  // state.date.isDateTime??'',
+                                  'Date',
+                                  style: customText().bold(
+                                    16,
+                                    Color.fromRGBO(63, 70, 151, 1),
                                   ),
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 45,
+                          ),
+                          SizedBox(
+                            height: 45,
+                          ),
+                          Text(
+                            state.taskList[index].title ?? '',
+                            style: customText().bold(
+                              24,
+                              Color.fromRGBO(63, 70, 151, 1),
                             ),
-                            Text(
-                              state.taskList[index].title ?? '',
-                              style: customText()
-                                  .bold(24, Color.fromRGBO(63, 70, 151, 1)),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          /* ElevatedButton(
+                            onPressed: ()  {
+                            }
+                            child: Text(
+                              'Delete',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
                             ),
-                          ],
-                        )),
+                          ),*/
+                        ],
+                      ),
+                    ),
                   );
                 },
               ),

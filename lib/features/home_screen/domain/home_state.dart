@@ -8,7 +8,7 @@ import 'package:taskfull/models/user.dart';
 class HomeState {
   final int id;
   final List<Tasks> taskList;
-  final List<Projects> projectList;
+  final List<ProjectsModel> projectList;
 
   HomeState({
     required this.id,
@@ -26,7 +26,7 @@ class HomeState {
   HomeState copyWith({
     int? id,
     List<Tasks>? taskList,
-    List<Projects>? projectList,
+    List<ProjectsModel>? projectList,
   }) {
     return HomeState(
       id: id ?? this.id,

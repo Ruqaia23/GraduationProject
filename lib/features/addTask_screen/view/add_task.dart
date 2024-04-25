@@ -82,7 +82,7 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
               MyInputField(
                 title: "Date",
                 hint: DateFormat.yMd().format(state.date),
-                controller: null,
+                controller: TextEditingController(text: state.date.toString()),
                 widget: IconButton(
                   icon: Icon(
                     Icons.calendar_today_outlined,

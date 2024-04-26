@@ -17,7 +17,9 @@ final projectProvider =
 });
 
 class ProjectNotifier extends StateNotifier<ProjectState> {
-  ProjectNotifier() : super(ProjectState.initial());
+  ProjectNotifier() : super(ProjectState.initial()) {
+    getProjects();
+  }
 
   validateDate() {
     if (state.title.text.isNotEmpty && state.note.text.isNotEmpty) {

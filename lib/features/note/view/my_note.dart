@@ -4,6 +4,7 @@ import 'package:taskfull/config/theme.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskfull/features/note/controller.dart';
+import 'package:taskfull/features/note/view/note_detailes.dart';
 
 import 'package:taskfull/models/note_model.dart';
 import 'package:taskfull/features/note/view/add_note.dart';
@@ -69,46 +70,60 @@ class _MyNoteState extends ConsumerState<MyNote> {
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: state.notes.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    margin: EdgeInsets.only(bottom: 20),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    color: word,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: ListTile(
-                        title: RichText(
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                            text: "${state.notes[index].title} :\n",
-                            style: CustomFontStyle().bold(20, bwhite),
-                            children: [
-                              TextSpan(
-                                text: "${state.notes[index].content} :\n",
-                                style: CustomFontStyle().normal(20, bwhite),
-                              ),
-                            ],
-                          ),
+                 
+                                      return GestureDetector(
+                    onTap: () {
+                                        final note = state.notes[index];
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NoteDetailScreen(note: note),
                         ),
-                        // subtitle: Padding(
-                        //   padding: const EdgeInsets.only(top: 8.0),
-                        //   child: Text(
-                        //     'Edeted:${DateFormat.yMd().format(filteredNotes[index].modifiefTime)} \n',
-                        //     style: CustomFontStyle().normal(12, bwhite),
-                        //   ),
-                        // ),
-                        trailing: IconButton(
-                          onPressed: () async {
-                            final result = await confirmDialog(context, () {
-                              controller.deleteNote(index, context);
-                            });
-                            if (result != null && result) {}
-                          },
-                          icon: Icon(
-                            Icons.delete,
-                            color: kgreen,
+                      );
+                    },
+
+                    child: Card(
+                      margin: EdgeInsets.only(bottom: 20),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      color: word,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: ListTile(
+                          title: RichText(
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            text: TextSpan(
+                              text: "${state.notes[index].title} :\n",
+                              style: CustomFontStyle().bold(20, bwhite),
+                              children: [
+                                TextSpan(
+                                  text: "${state.notes[index].content} :\n",
+                                  style: CustomFontStyle().normal(20, bwhite),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // subtitle: Padding(
+                          //   padding: const EdgeInsets.only(top: 8.0),
+                          //   child: Text(
+                          //     'Edeted:${DateFormat.yMd().format(filteredNotes[index].modifiefTime)} \n',
+                          //     style: CustomFontStyle().normal(12, bwhite),
+                          //   ),
+                          // ),
+                          trailing: IconButton(
+                            onPressed: () async {
+                              final result = await confirmDialog(context, () {
+                                controller.deleteNote(index, context);
+                              });
+                              if (result != null && result) {}
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: kgreen,
+                            ),
                           ),
                         ),
                       ),

@@ -170,28 +170,33 @@ class _projectScreenState extends ConsumerState<ProjectScreen> {
                ),
               //google map >> new page
      
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(40.0),
-                    child: CreateButton(
-                        lebel: "Create  ",
-                        onTap: () => controller.newProject(context)),
+         Row(
+  children: [
+    Padding(
+      padding: const EdgeInsets.all(40.0),
+      child: CreateButton(
+        lebel: "Create  ",
+        onTap: () {
+          // Check if any of the text fields are empty
+          if (state.title.text.isEmpty ||
+              state.note.text.isEmpty ||
+              projectTaskList.any((task) => task.isEmpty)) {
+            // Show a message to the user that fields are empty
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Please fill all fields'),
+              ),
+            );
+          } else {
+            // All fields are filled, proceed to create project
+            controller.newProject(context);
+          }
+        },
+      ),
+    ),
+  ],
+),
 
-                    /* final projectData = {
-                          'title': state.title.text,
-                          'note': state.note.text,
-                          'date': state.date.toString(),
-                          'tasks': projectTaskList,
-                        };
-
-                        final box = await Hive.openBox('projects');
-                        box.add(projectData);
-
-                        Navigator.pop(context);*/
-                  ),
-                ],
-              ), 
                
             ],
           ),

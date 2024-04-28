@@ -7,6 +7,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/features/addProject_addTask_screen/domain/project_controller.dart';
@@ -73,7 +74,9 @@ class _AllPageState extends ConsumerState<AllPage> {
                               child: FittedBox(
                                 fit: BoxFit.contain,
                                 child: Text(
-                                  state.date.toString(),
+                                  DateFormat("dd-mm-yyyy-EE")
+                                      .format(state.date)
+                                      .toString(),
                                   style: customText().bold(
                                     16,
                                     Color.fromRGBO(63, 70, 151, 1),
@@ -173,7 +176,10 @@ class _AllPageState extends ConsumerState<AllPage> {
                             .bold(20, Color.fromRGBO(63, 70, 151, 1)),
                       ),
                       subtitle: Text(
-                        ProjectState.date.toString(),
+                             DateFormat("dd-mm-yyyy-EE")
+                                      .format(ProjectState.date)
+                                      .toString(),
+                    
                       ),
                       leading: Icon(
                         Icons.note_alt,

@@ -195,16 +195,32 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
                 ),
               ),
               //google map >> new page
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(40.0),
-                    child: CreateButton(
-                        lebel: "Create  ",
-                        onTap: () => controller.newTask(context)),
-                  ),
-                ],
+            Row(
+  children: [
+    Padding(
+      padding: const EdgeInsets.all(40.0),
+      child: CreateButton(
+        lebel: "Create  ",
+        onTap: () {
+          // Check if any of the text fields are empty
+          if (state.title.text.isEmpty ||
+              state.note.text.isEmpty) {
+            // Show a message to the user that fields are empty
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Please fill all fields'),
               ),
+            );
+          } else {
+            // All fields are filled, proceed to create task
+            controller.newTask(context);
+          }
+        },
+      ),
+    ),
+  ],
+),
+
             ],
           ),
         ),

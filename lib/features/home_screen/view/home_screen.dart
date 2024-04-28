@@ -60,6 +60,7 @@ class _homeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
       bottomNavigationBar: BottomNavyBar(
+          selectedIndex: currentIndex, // هذا كان الخطا لازم تعطيه المتغير حتى يتغير لما تختاري
           backgroundColor: kBackgroundColor,
           onItemSelected: (index) {
             _pageController.jumpToPage(index);
@@ -72,11 +73,13 @@ class _homeScreenState extends ConsumerState<HomeScreen> {
               title: Text("Home"),
             ),
             BottomNavyBarItem(
+              activeColor: kgreen,
               icon: Icon(Icons.article_outlined,
                   size: 32, color: Color.fromRGBO(203, 208, 95, 100)),
               title: Text("note"),
             ),
             BottomNavyBarItem(
+              activeColor: kgreen,
               icon: Icon(Icons.person_outline,
                   size: 32, color: Color.fromRGBO(203, 208, 95, 100)),
               title: Text("person"),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart';
 import 'package:taskfull/data/hive_functions.dart';
 import 'package:taskfull/features/addProject_addTask_screen/domain/project_state.dart';
@@ -64,6 +65,8 @@ class ProjectNotifier extends StateNotifier<ProjectState> {
         note: state.note.text,
       ),
     );
+
+
     state = state.copyWith(
       note: TextEditingController(),
       date: DateTime.now(),

@@ -32,17 +32,16 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
   ];
 
   Future<void> _navigateToMapScreen(BuildContext context) async {
-  final selectedLocation = await Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => MapScreen()),
-  );
+    final selectedLocation = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MapScreen()),
+    );
 
-  // Handle the selected location here
-  if (selectedLocation != null) {
-    // Do something with the selected location
+    // Handle the selected location here
+    if (selectedLocation != null) {
+      // Do something with the selected location
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -174,25 +173,27 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
               const SizedBox(
                 height: 50,
               ),
-               GestureDetector(
-                onTap: (){
-                      _navigateToMapScreen(context);
+              GestureDetector(
+                onTap: () {
+                  _navigateToMapScreen(context);
 
                   print("I'm maps button , you presed on me ");
                 },
-                 child: Container(
-                   child: Row(
+                child: Container(
+                  child: Row(
                     children: [
-                      Icon(Icons.add, color: kgreen,),
+                      Icon(
+                        Icons.add,
+                        color: kgreen,
+                      ),
                       Text(
                         'Add place',
-                        style:  CustomFontStyle().normal(16, kgreen),
-                   
+                        style: CustomFontStyle().normal(16, kgreen),
                       ),
                     ],
-                                 ),
-                 ),
-               ),
+                  ),
+                ),
+              ),
               //google map >> new page
               Row(
                 children: [

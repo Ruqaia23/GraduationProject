@@ -41,13 +41,14 @@ class _MapScreenState extends State<MapScreen> {
             right: 33,
             child: GestureDetector(
               onTap: () {
-                _showLocationDialog(context); 
+                _showLocationDialog(context);
               },
               child: Container(
                 width: 100,
                 height: 60,
                 decoration: BoxDecoration(
-                    color: Color(0xff99BC85), borderRadius: BorderRadius.circular(20)),
+                    color: Color(0xff99BC85),
+                    borderRadius: BorderRadius.circular(20)),
                 child: Center(
                     child: Text(
                   'Done',
@@ -67,20 +68,20 @@ class _MapScreenState extends State<MapScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Confirm Location'),
-          content: Text('Do you want to save the selected location: $_selectedLocation'),
+          content: Text(
+              'Do you want to save the selected location: $_selectedLocation'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
-               
-                _saveLocation(); 
-                Navigator.pop(context); 
+                _saveLocation();
+                Navigator.pop(context);
                 Navigator.pop(context);
               },
               child: const Text('Yes'),
             ),
             TextButton(
                 onPressed: () {
-                  Navigator.pop(context); 
+                  Navigator.pop(context);
                 },
                 child: const Text('No')),
           ],
@@ -90,7 +91,8 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   void _saveLocation() {
-    // يمكنك هنا تنفيذ الخطوات اللازمة لحفظ الموقع
-    print('Selected Location: $_selectedLocation'); // مثال: طباعة الموقع المحدد في الكونسول
+    //   تنفيذ الخطوات اللازمة لحفظ الموقع
+    print(
+        'Selected Location: $_selectedLocation'); // مثال: طباعة الموقع المحدد في الكونسول
   }
 }

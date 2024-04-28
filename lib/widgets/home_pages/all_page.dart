@@ -104,9 +104,9 @@ class _AllPageState extends ConsumerState<AllPage> {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    setState(() {
+                                    /*setState(() {
                                       state.taskList.removeAt(index);
-                                    });
+                                    });*/
                                   },
                                   icon: const Icon(
                                     Icons.delete,

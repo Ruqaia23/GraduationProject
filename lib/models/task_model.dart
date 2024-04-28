@@ -7,14 +7,19 @@ class TaskModel {
   TimeOfDay? startDate;
   TimeOfDay? endDate;
   int? remind;
+  double? latitude;
+  double? longitude;
 
-  TaskModel(
-      {this.title,
-      this.note,
-      this.date,
-      this.startDate,
-      this.endDate,
-      this.remind});
+  TaskModel({
+    this.title,
+    this.note,
+    this.date,
+    this.startDate,
+    this.endDate,
+    this.remind,
+    this.latitude,
+    this.longitude,
+  });
 
   TaskModel.fromJson(Map<dynamic, dynamic> json) {
     title = json['title'];
@@ -23,6 +28,8 @@ class TaskModel {
     startDate = TimeOfDay.fromDateTime(json['start_date']);
     endDate = TimeOfDay.fromDateTime(json['end_date']);
     remind = json['remind'];
+     latitude = json['latitude']; 
+    longitude = json['longitude']; 
   }
 
   Map<dynamic, dynamic> toJson() {
@@ -39,6 +46,11 @@ class TaskModel {
       minute: endDate!.minute,
     );
     data['remind'] = remind;
+     data['latitude'] = latitude; 
+    data['longitude'] = longitude; 
+
     return data;
+    
+    
   }
 }

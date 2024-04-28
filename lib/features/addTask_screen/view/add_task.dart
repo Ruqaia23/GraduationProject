@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:taskfull/config/config.dart';
 import 'package:intl/intl.dart';
 import 'package:taskfull/config/theme.dart';
 import 'package:taskfull/features/addTask_screen/domain/addTask_controller.dart';
 import 'package:taskfull/models/task.dart';
+import 'package:taskfull/screens/map.dart';
 import 'package:taskfull/widgets/Home/botton_Add_Task_project.dart';
 import 'package:taskfull/widgets/button.dart';
 import 'package:get/get.dart';
@@ -27,6 +30,19 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
     15,
     20,
   ];
+
+  Future<void> _navigateToMapScreen(BuildContext context) async {
+  final selectedLocation = await Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => MapScreen()),
+  );
+
+  // Handle the selected location here
+  if (selectedLocation != null) {
+    // Do something with the selected location
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +171,28 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
                   },
                 ),
               ),
+              const SizedBox(
+                height: 50,
+              ),
+               GestureDetector(
+                onTap: (){
+                      _navigateToMapScreen(context);
+
+                  print("I'm maps button , you presed on me ");
+                },
+                 child: Container(
+                   child: Row(
+                    children: [
+                      Icon(Icons.add, color: kgreen,),
+                      Text(
+                        'Add place',
+                        style:  CustomFontStyle().normal(16, kgreen),
+                   
+                      ),
+                    ],
+                                 ),
+                 ),
+               ),
               //google map >> new page
               Row(
                 children: [
@@ -165,7 +203,7 @@ class _taskScreenState extends ConsumerState<TaskScreen> {
                         onTap: () => controller.newTask(context)),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

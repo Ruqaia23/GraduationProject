@@ -1,6 +1,6 @@
 {
-    "name": "taskfull",
-    "short_name": "taskfull",
+    "name": "graduation_project",
+    "short_name": "graduation_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
